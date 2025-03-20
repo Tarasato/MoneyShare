@@ -12,13 +12,13 @@ const MoneyShare = () => {
     const [moneyShare, setMoneyShare] = useState("0.00");
 
     const calculate = () => {
-        if (money == '' ) {
+        if (money == '') {
             alert('กรุณาป้อนข้อมูลจำนวนเงิน');
             return;
-        }else if(people == ''){
+        } else if (people == '') {
             alert('กรุณาป้อนข้อมูลจำนวนคน');
             return;
-        }else if(tip == true && tipValue == ''){
+        } else if (tip == true && tipValue == '') {
             alert('กรุณาป้อนข้อมูลจำนวนเงินทิป');
             return;
         }
@@ -28,37 +28,40 @@ const MoneyShare = () => {
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <ScrollView style={{ flex: 1, width: '100%' }}>
-            <View style={{ width: '100%', alignItems: 'center' }}>
-                <View style={styles.appbar}>
-                    <Text style={styles.titleAppbar}>MoneyShare</Text>
-                </View>
-                <Image source={taiga} style={styles.logo}></Image>
+                <View style={{ width: '100%', alignItems: 'center' }}>
+                    <View style={styles.appbar}>
+                        <Text style={styles.titleAppbar}>MoneyShare</Text>
+                    </View>
+                    <Image source={taiga} style={styles.logo}></Image>
 
-                <TextInput keyboardType='numeric' placeholder='ป้อนจำนวนเงิน' style={styles.inputNumber} value={money} onChangeText={setMoney} ></TextInput>
+                    <TextInput keyboardType='numeric' placeholder='ป้อนจำนวนเงิน' style={styles.inputNumber} value={money} onChangeText={setMoney} ></TextInput>
 
-                <TextInput keyboardType='numeric' placeholder='ป้อนจำนวนคน' style={styles.inputNumber} value={people} onChangeText={setPeople} ></TextInput>
-                <View style={{ height: 30 }} />
-                <View style={{ flexDirection: 'row' }}>
-                    <Checkbox value={tip} onValueChange={() => {
-                        setTip(!tip)
-                        if (tip == true) {
-                            setTipValue('');
-                        }
-                    }} />
-                    <View style={{ width: 5 }} />
-                    <Text>ทิปให้พนักงาน</Text>
+                    <TextInput keyboardType='phone-pad' placeholder='ป้อนจำนวนคน' style={styles.inputNumber} value={people} onChangeText={(text) => {
+                        const numericValue = text.replace(/[^0-9]/g, '');
+                        setPeople(numericValue);
+                    }} ></TextInput>
+                    <View style={{ height: 30 }} />
+                    <View style={{ flexDirection: 'row' }}>
+                        <Checkbox value={tip} onValueChange={() => {
+                            setTip(!tip)
+                            if (tip == true) {
+                                setTipValue('');
+                            }
+                        }} />
+                        <View style={{ width: 5 }} />
+                        <Text>ทิปให้พนักงาน</Text>
+                    </View>
+                    <TextInput keyboardType='numeric' placeholder='ป้อนจำนวนเงินทิป' style={styles.inputNumber} value={tipValue} onChangeText={setTipValue} editable={tip} ></TextInput>
+                    <TouchableOpacity style={styles.btnCal} onPress={() => calculate()}>
+                        <Text style={{ color: 'white', textAlign: 'center' }} >คำนวณ</Text>
+                    </TouchableOpacity>
+                    <View style={{ height: 30 }} />
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={styles.result}>หารกันคนละ</Text>
+                        <Text style={styles.result}> {moneyShare} </Text>
+                        <Text style={styles.result}>บาท</Text>
+                    </View>
                 </View>
-                <TextInput keyboardType='numeric' placeholder='ป้อนจำนวนเงินทิป' style={styles.inputNumber} value={tipValue} onChangeText={setTipValue} editable={tip} ></TextInput>
-                <TouchableOpacity style={styles.btnCal} onPress={() => calculate()}>
-                    <Text style={{ color: 'white', textAlign: 'center' }} >คำนวณ</Text>
-                </TouchableOpacity>
-                <View style={{ height: 30 }} />
-                <View style={{ flexDirection: 'row' }}>
-                    <Text style={styles.result}>หารกันคนละ</Text>
-                    <Text style={styles.result}> {moneyShare} </Text>
-                    <Text style={styles.result}>บาท</Text>
-                </View>
-            </View>
             </ScrollView>
         </TouchableWithoutFeedback>
     )
