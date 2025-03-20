@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native'
 import React from 'react'
 import taiga from './assets/TaigaIcon.png';
 import Checkbox from 'expo-checkbox';
@@ -27,6 +27,7 @@ const MoneyShare = () => {
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <ScrollView style={{ flex: 1, width: '100%' }}>
             <View style={{ width: '100%', alignItems: 'center' }}>
                 <View style={styles.appbar}>
                     <Text style={styles.titleAppbar}>MoneyShare</Text>
@@ -58,6 +59,7 @@ const MoneyShare = () => {
                     <Text style={styles.result}>บาท</Text>
                 </View>
             </View>
+            </ScrollView>
         </TouchableWithoutFeedback>
     )
 }
